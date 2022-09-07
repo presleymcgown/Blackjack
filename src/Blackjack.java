@@ -68,10 +68,25 @@ public class Blackjack extends GraphicsProgram {
         // TODO: set up your GLabels
 
         blackjack = new GLabel("BLACKJACK");
-        blackjack.setFont("Felix Titling-50");
+        blackjack.setFont("Felix Titling-70");
         blackjack.setColor(Color.white);
         blackjack.setVisible(true);
-        add(blackjack, ((getWidth() / 2) - (blackjack.getWidth() / 2)), 50);
+        add(blackjack, ((getWidth() / 2) - (blackjack.getWidth() / 2)), 70);
+
+        balanceLabel = new GLabel("YOUR BALANCE: $" + balance);
+        balanceLabel.setFont("Felix Titling-24");
+        balanceLabel.setColor(Color.white);
+        balanceLabel.setVisible(true);
+        add(balanceLabel, ((getWidth() / 2) - (balanceLabel.getWidth() / 2)), 200);
+
+        bankLabel = new GLabel("BANK BALANCE: $" + bank);
+        bankLabel.setFont("Felix Titling-24");
+        bankLabel.setColor(Color.white);
+        bankLabel.setVisible(true);
+        add(bankLabel, ((getWidth() / 2) - (bankLabel.getWidth() / 2)), 250);
+
+
+
 
     }
 
@@ -163,6 +178,12 @@ public class Blackjack extends GraphicsProgram {
 
         blackjack.setVisible(false);
 
+        remove(bankLabel);
+        remove(balanceLabel);
+
+        add(bankLabel,10, 30);
+        add(balanceLabel, 10, 440);
+
         player = new GHand(new Hand(deck, false));
         add(player, 100, 250);
 
@@ -205,6 +226,10 @@ public class Blackjack extends GraphicsProgram {
     }
 
     private void stay() {
+
+        hitButton.setVisible(false);
+        stayButton.setVisible(false);
+        quitButton.setVisible(false);
 
         dealer.flipCard(0);
 

@@ -35,7 +35,7 @@ public class GCard extends GCompound {
 
         // make a GRect for the back of the card
 
-        GRect back = new GRect(107, 150);
+        back = new GRect(107, 150);
         Color backColor = new Color(180, 78, 78);
         back.setFillColor(backColor);
         back.setFilled(true);
