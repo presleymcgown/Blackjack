@@ -37,6 +37,8 @@ public class Blackjack extends GraphicsProgram {
     private GHand player;
     private GHand dealer;
 
+    private boolean quit;
+
 
     @Override
     public void init(){
@@ -84,11 +86,22 @@ public class Blackjack extends GraphicsProgram {
         add(bankLabel, ((getWidth() / 2) - (bankLabel.getWidth() / 2)), 250);
 
         if(bank == 0){
-            Dialog.getYesOrNo("You have won all the bank's money and cannot wager any more. Would you like to quit the game?");
+
+            quit = Dialog.getYesOrNo("You have won all the bank's money and cannot wager any more. Would you like to quit the game?");
+
+            if(quit){
+                System.exit(0);
+            }
+
         }
 
         if(balance == 0){
-            Dialog.getYesOrNo("You have lost all your money to the bank. Would you like to quit the game?");
+
+            quit = Dialog.getYesOrNo("You have lost all your money to the bank. Would you like to quit the game?");
+
+            if(quit){
+                System.exit(0);
+            }
         }
 
 
@@ -138,6 +151,28 @@ public class Blackjack extends GraphicsProgram {
     }
 
     private void wager(){
+
+        if(bank == 0){
+
+            quit = Dialog.getYesOrNo("You have won all the bank's money and cannot wager any more. Would you like to quit the game?");
+
+            if(quit){
+                System.exit(0);
+            }
+
+        }
+
+        if(balance == 0){
+
+            quit = Dialog.getYesOrNo("You have lost all your money to the bank. Would you like to quit the game?");
+
+            if(quit){
+                System.exit(0);
+            }
+
+        }
+
+
 
         if(wager <= 0){
 
