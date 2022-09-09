@@ -65,8 +65,6 @@ public class Blackjack extends GraphicsProgram {
 
         addActionListeners();
 
-        // TODO: set up your GLabels
-
         blackjack = new GLabel("BLACKJACK");
         blackjack.setFont("Felix Titling-70");
         blackjack.setColor(Color.white);
@@ -85,7 +83,13 @@ public class Blackjack extends GraphicsProgram {
         bankLabel.setVisible(true);
         add(bankLabel, ((getWidth() / 2) - (bankLabel.getWidth() / 2)), 250);
 
+        if(bank == 0){
+            Dialog.getYesOrNo("You have won all the bank's money and cannot wager any more. Would you like to quit the game?");
+        }
 
+        if(balance == 0){
+            Dialog.getYesOrNo("You have lost all your money to the bank. Would you like to quit the game?");
+        }
 
 
     }
@@ -184,6 +188,11 @@ public class Blackjack extends GraphicsProgram {
         add(bankLabel,10, 30);
         add(balanceLabel, 10, 440);
 
+        wagerLabel = new GLabel("WAGER: $" + wager);
+        add(wagerLabel, 10, 235);
+        wagerLabel.setFont("Felix Titling");
+        wagerLabel.setColor(Color.white);
+
         player = new GHand(new Hand(deck, false));
         add(player, 100, 250);
 
@@ -267,7 +276,34 @@ public class Blackjack extends GraphicsProgram {
 
         }else{
 
-            // TODO: figure out who is closer to 21 and they win
+            int playerRemainder;
+            int bankRemainder;
+
+            playerRemainder = 21 - player.getTotal();
+            bankRemainder = 21 - dealer.getTotal();
+
+            if(playerRemainder > bankRemainder){
+
+                Dialog.showMessage("The dealer was closer to 21. You lost!");
+
+                balance -= wager;
+
+                bank += wager;
+
+                resetGame();
+
+            }else if(bankRemainder > playerRemainder){
+
+                Dialog.showMessage("You are closer to 21. You won!");
+
+                balance += wager;
+
+                bank -= wager;
+
+                resetGame();
+
+
+            }
 
         }
 
@@ -286,6 +322,8 @@ public class Blackjack extends GraphicsProgram {
     }
 
     private void resetGame(){
+
+        wager = 0;
 
         removeAll();
         init();
