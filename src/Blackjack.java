@@ -196,6 +196,7 @@ public class Blackjack extends GraphicsProgram {
                 Dialog.showMessage("You have made a wager. You may now play the game.");
 
             }
+            
         }
 
 
@@ -369,5 +370,5 @@ public class Blackjack extends GraphicsProgram {
 
         new Blackjack().start();
 
-    }  
+    }
 }
